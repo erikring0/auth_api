@@ -3,18 +3,21 @@ const ctrl = require('./registerController')
 const User = require('../../model/user')
 const bcrypt = require('bcrypt');
 const sequelize = require('../../model/db');
+const db = require("../../model")
 
 router.post('/', ctrl.validateData, (req, res) => {
-    User.sync().then(() => {
-        User.create(
-            { firstName: req.body.firstName },
-            { lastName: req.body.lastName },
-            { username: req.body.username },
-            { password: req.body.password }
-        )
-        res.json({ response: 'You are now registered.' })
-    })
-})
+   
+   
+    const test = { firstName, lastName, userName, password } = req.body;
+    console.log(test)
+    db.User.create(test)
+        .then(user => {
+        res.status(201).json(user);
+        })
+        .catch(err => {
+        res.status(400).json({ error: err.message });
+    });
+});
 
 module.exports = router;
 

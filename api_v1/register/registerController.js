@@ -11,6 +11,7 @@ const {User} = require('../../model/user')
 
 function validateData(req, res, next) {
     var errorMessage = []
+    console.log(req.body)
     if(req.body.username.length < 3){
         errorMessage.push('Username must contain at least 3 characters.' + '\n')
     }
@@ -19,7 +20,8 @@ function validateData(req, res, next) {
     }
     if(errorMessage.length > 0) {
         res.status(403).send(errorMessage)
-    } next()
+    } 
+    next()
 }
 
 
