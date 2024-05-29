@@ -1,8 +1,9 @@
-const {DataTypes} = require('sequelize')
+const {DataTypes, Model} = require('sequelize')
 const sequelize = require('./db')
 
-const User = sequelize.define(
-    'User',
+class User extends Model {}
+
+User.init(
     {
         firstName: {
             type: DataTypes.STRING,
@@ -20,6 +21,10 @@ const User = sequelize.define(
             type: DataTypes.CHAR(60).BINARY,
             allowNull: false
         }
+    },
+    {
+        sequelize,
+        modelName: 'User'
     }
 ).sync({force: false})
 console.log(User)
