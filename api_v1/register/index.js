@@ -3,6 +3,7 @@ const ctrl = require('./registerController')
 const User = require('../../model/user')
 const bcrypt = require('bcrypt');
 const sequelize = require('../../model/db');
+const db = require("../../model")
 
 router.post('/',ctrl.validateData, 
                 ctrl.isNewUser, 
