@@ -4,17 +4,12 @@ const User = require('../../model/user')
 const bcrypt = require('bcrypt');
 const sequelize = require('../../model/db');
 
-router.post('/', ctrl.validateData, (req, res) => {
-    sequelize.sync().then(() => {
-        User.create(
-            { firstName: req.body.firstName },
-            { lastName: req.body.lastName },
-            { username: req.body.username },
-            { password: req.body.password }
-        )
-        res.json({ response: 'You are now registered.' })
-    })
-    
+router.post('/',ctrl.validateData, 
+                ctrl.isNewUser, 
+                ctrl.hashPassword, 
+                ctrl.addUser, 
+                (req, res) => {
+    res.json({success: true, message: req.User})
 })
 
 module.exports = router;

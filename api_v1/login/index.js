@@ -1,13 +1,12 @@
 router = require('express').Router();
 const ctrl = require('./loginController');
 
-router.post('/',ctrl.findUserByEmail, 
+router.post('/',ctrl.findUserByUsername, 
                 ctrl.validateUserPassword, 
                 ctrl.generateJSONToken, 
-                 (req, res, next) => {
+                (req, res, next) => {
 
-    // res.json({success: true, message: req.user.token})
-    res.json({response: 'You are now logged in.'})
+    res.json({success: true, message: req.user.token})
 })
 
 module.exports = router;

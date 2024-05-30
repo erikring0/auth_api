@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const {User} = require('../../model/user')
+const db = require('../../model/db')
 
 /* 
     Validate data
@@ -19,23 +19,37 @@ function validateData(req, res, next) {
     }
     if(errorMessage.length > 0) {
         res.status(403).send(errorMessage)
-    } next()
+    } else next()
 }
-
 
 async function isNewUser(req, res, next) {
-    const existingUser = await User.findOne({ where: { username: req.body.user.username } })
+    const existingUser = await db.user.findOne({ where: { username: req.body.username } })
     if(existingUser) {
         res.status(409).send('This username already exists.')
-    } next()
+    } else next()   
 }
 
-function hashPassword(req, res, next) {
-    req.user = {}
+async function hashPassword(req, res, next) {
+    try {
+        const hashPassword = await bcrypt.hash(req.body.password, 10)
+        req.body.password = hashPassword
+        next()
+    } catch(e) {
+        console.error(e.errorMessage)
+    }
 }
 
 function addUser(req, res, next) {
-
+    db.sequelize.sync().then((x) => {
+        x.models.User.create({
+            firstName: req.body.firstName ,
+            lastName: req.body.lastName ,
+            username: req.body.username ,
+            password: req.body.password }
+        )
+        console.log(req.body)
+    }) 
+    next()
 }
 
-module.exports = {validateData}
+module.exports = { validateData, isNewUser, hashPassword, addUser }

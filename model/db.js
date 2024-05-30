@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const process = require('process');
+const getUser = require("./user")
 
 let database = process.env.NODE_ENV == 'dev' ? process.env.MYSQL_DEV_DATABASE : process.env.MYSQL_DEV_DATABASE
 let username = process.env.NODE_ENV == 'dev' ? process.env.MYSQL_DEV_USER : process.env.MYSQL_PROD_USER
@@ -9,13 +10,16 @@ let host = process.env.NODE_ENV == 'dev' ? process.env.MYSQL_DEV_HOST : process.
 
 const sequelize = new Sequelize(database, username, password, { host: host, dialect: 'mysql' })
 
-
+const db = {}
 sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
+    db.sequelize = sequelize
+    db.user = getUser(db.sequelize)
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
 
-module.exports = sequelize
+ 
+module.exports = db
