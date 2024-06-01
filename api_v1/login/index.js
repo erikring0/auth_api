@@ -1,13 +1,13 @@
-router = require('express').Router();
+const router = require('express').Router();
 const ctrl = require('./loginController');
 
-router.post('/',ctrl.findUserByUsername, 
+router.post('/',ctrl.findUserByEmail, 
                 ctrl.validateUserPassword, 
                 ctrl.generateJSONToken, 
-                (req, res, next) => {
+                (req, res) => {
 
-    res.json({success: true, message: req.user.token})
-})
+    res.json({success: true, message: req.user.token});
+});
 
 module.exports = router;
 

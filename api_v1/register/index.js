@@ -1,17 +1,13 @@
 const router = require('express').Router();
-const ctrl = require('./registerController')
-const User = require('../../model/user')
-const bcrypt = require('bcrypt');
-const sequelize = require('../../model/db');
-const db = require("../../model")
+const ctrl = require('./registerController');
 
 router.post('/',ctrl.validateData, 
                 ctrl.isNewUser, 
                 ctrl.hashPassword, 
                 ctrl.addUser, 
                 (req, res) => {
-    res.json({success: true, message: req.User})
-})
+    res.json({success: true, message: req.newUser});
+});
 
 module.exports = router;
 

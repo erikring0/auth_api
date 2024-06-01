@@ -1,10 +1,7 @@
 const sequelize = require('./db');
 const User = require('./user');
 
-const db = {
-  sequelize,
-  User,
-};
+const db = { sequelize, User };
 
 // Sync the models with the database
 db.sequelize.sync({ force: false })
