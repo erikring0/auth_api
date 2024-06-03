@@ -22,7 +22,7 @@ function validateUserPassword(req, res, next) {
 }
 
 function generateJSONToken(req, res, next){
-    req.user.token = jwt.sign(req.user.toJSON(), process.env.MY_SECRET, { expiresIn: "24h"});
+    req.user.token = jwt.sign(req.user.toJSON(), process.env.MY_SECRET, { expiresIn: '24h'});
     next();
 } 
 
