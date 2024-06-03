@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const ctrl = require("./loginController");
+const router = require('express').Router();
+const ctrl = require('./loginController');
 
 router.post(
-  "/",
+  '/',
   ctrl.findUserByEmail,
   ctrl.validateUserPassword,
   ctrl.generateJSONToken,

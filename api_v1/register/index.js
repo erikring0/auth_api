@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const ctrl = require("./registerController");
+const router = require('express').Router();
+const ctrl = require('./registerController');
 
 router.post(
-  "/",
+  '/',
   ctrl.validateData,
   ctrl.isNewUser,
   ctrl.hashPassword,

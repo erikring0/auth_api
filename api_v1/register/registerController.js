@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
-const validator = require("validator");
-const db = require("../../model/db");
+const bcrypt = require('bcrypt');
+const validator = require('validator');
+const db = require('../../model/db');
 
-/* 
+/*
     Validate data
     Verify the user does not exist
     Add the user if they do not exist
@@ -13,7 +13,7 @@ const db = require("../../model/db");
 function validateData(req, res, next) {
   const errorMessage = [];
   if (!validator.isEmail(req.body.email)) {
-    errorMessage.push("Email is not valid." + "\n");
+    errorMessage.push('Email is not valid.' + '\n');
   }
   if (
     !validator.isStrongPassword(req.body.password, {
@@ -25,7 +25,7 @@ function validateData(req, res, next) {
     })
   ) {
     errorMessage.push(
-      "Password is not strong. Please include at least 7 characters and 1 symbol.",
+      'Password is not strong. Please include at least 7 characters and 1 symbol.',
     );
   }
   if (errorMessage.length > 0) {
@@ -36,7 +36,7 @@ function validateData(req, res, next) {
 function isNewUser(req, res, next) {
   db.models.User.findOne({ where: { email: req.body.email } })
     .then((result) => {
-      if (result) res.status(409).send("This account may already exist.");
+      if (result) res.status(409).send('This account may already exist.');
       else next();
     })
     .catch((err) => next(err));
@@ -66,4 +66,6 @@ function addUser(req, res, next) {
     .catch((err) => next(err));
 }
 
-module.exports = { validateData, isNewUser, hashPassword, addUser };
+module.exports = {
+  validateData, isNewUser, hashPassword, addUser,
+};
