@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "nodemon index.js",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "_lint": "eslint --config ./.eslintrc.json --ext js --ext jsx --ext tsx --ext ts",
+    "lint": "npm run _lint -- .",
+    "linter": "npm run _lint -- --fix ."
   },
   "keywords": [],
   "author": "",
@@ -14,15 +17,17 @@
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "install-peerdeps": "^3.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.9.9",
+    "mysql2": "^3.10.0",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7",
     "validator": "^13.12.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
-    "eslint": "^9.4.0",
-    "globals": "^15.3.0"
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "globals": "^15.3.0",
+    "prettier": "^3.3.0"
   }
 }
