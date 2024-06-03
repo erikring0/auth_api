@@ -1,0 +1,17 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+    },
+    "extends": [
+        "eslint:recommended",
+        "airbnb",
+        "plugin:prettier/recommended"
+    ]   
+}
