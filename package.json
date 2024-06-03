@@ -8,7 +8,7 @@
     "start": "nodemon index.js",
     "_lint": "eslint --config ./.eslintrc.json --ext js --ext jsx --ext tsx --ext ts",
     "lint": "npm run _lint -- .",
-    "lint:fix": "npm run _lint -- --fix ."
+    "linter": "npm run _lint -- --fix ."
   },
   "keywords": [],
   "author": "",
