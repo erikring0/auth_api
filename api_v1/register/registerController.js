@@ -13,7 +13,7 @@ const db = require('../../model/db');
 function validateData(req, res, next) {
   const errorMessage = [];
   if (!validator.isEmail(req.body.email)) {
-    errorMessage.push('Email is not valid.' + '\n');
+    errorMessage.push('Email is not valid.');
   }
   if (
     !validator.isStrongPassword(req.body.password, {

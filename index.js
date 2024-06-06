@@ -10,9 +10,11 @@ app.use(express.json());
 const port = 3000;
 const login = require('./api_v1/login');
 const register = require('./api_v1/register');
+const twilio = require('./api_v1/twilio');
 
 app.use('/login', login);
 app.use('/register', register);
+app.use('/twilio', twilio);
 
 // Start Express server only if database connection is successful
 app.listen(port, () => {
