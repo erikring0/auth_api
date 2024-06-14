@@ -8,20 +8,19 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 const port = 3000;
-const login = require('./api_v1/login');
-const register = require('./api_v1/register');
-const twilio = require('./api_v1/twilio');
+const users = require('./api_v1/users');
 
-app.use('/login', login);
-app.use('/register', register);
-app.use('/twilio', twilio);
+app.use('/user', users);
 
 // Start Express server only if database connection is successful
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-app.use((err, req, res) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  res.status(err.statusCode || 500).json({
+    status: err.statusCode,
+    message: err.message,
+  });
 });

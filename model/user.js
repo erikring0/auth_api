@@ -18,6 +18,16 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING(60).BINARY,
     allowNull: false,
   },
+  resetToken: {
+    type: DataTypes.INTEGER(4),
+    allowNull: true,
+    defaultValue: null,
+  },
+  resetExp: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: null,
+  },
 });
 
 module.exports = User;

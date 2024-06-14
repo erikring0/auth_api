@@ -1,1 +1,3 @@
-console.log('code');
+const email = require('./emailController');
+
+module.exports = email;
